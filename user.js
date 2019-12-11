@@ -52,12 +52,18 @@ User.deleteData = async (req, res) => {
     try{
         const nickNameData = req.body.nickName;
         const passwdData = req.body.passwd;
+        const idData = req.body.id;
         const deleteData = await User.destroy({
             where : {
+                user_id: idData,
                 nickname: nickNameData,
                 passwd: passwdData
-        }});
-        res.send(JSON.stringify(deleteData));
+        }});        
+        const sequenceRestart = await database.sequelize.query(`ALTER SEQUENCE "Users_user_id_seq" RESTART WITH ${Number(idData) + 1}`);
+        res.send({
+            restart: JSON.stringify(sequenceRestart),
+            data: JSON.stringify(deleteData)
+        });
     } catch(error){
         console.log(error);
         res.send(error);
@@ -65,7 +71,6 @@ User.deleteData = async (req, res) => {
 };
 
 User.updateData = async (req, res) => {
-    console.log("UpdateStart");
     try{
         const options = req.body.options;
         if(options == "nickName"){

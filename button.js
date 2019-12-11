@@ -7,6 +7,7 @@ const updateData = document.getElementById("updateData");
 const name = document.getElementById("name");
 const ps = document.getElementById("passwd");
 const inputUpdateData = document.getElementById("inputUpdateData");
+const idInputData = document.getElementById('idInputData');
 
 //Button
 const button = document.getElementById("button");
@@ -69,8 +70,9 @@ addButton.onclick = () => {
 deleteButton.onclick = () => {
     const nameData = name.value;
     const passwdData = ps.value;
+    const idData = idInputData.value;
     if (nameData != "" && passwdData != "") {
-        const userData = { nickName: nameData, passwd: passwdData };
+        const userData = { id: idData, nickName: nameData, passwd: passwdData };
         const data = fetch(rootUrl + "users/remove", {
             method: 'DELETE',
             credentials: 'same-origin',
