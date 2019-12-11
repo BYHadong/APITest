@@ -18,7 +18,7 @@ const updateButton = document.getElementById("update");
 //select
 const selectData = document.getElementById("optionSelect");
 
-const rootUrl = "http://localhost:8080/";
+const rootUrl = "http://apitest.com";
 
 button.onclick = () => {
     const data = fetch(rootUrl + "users", {
